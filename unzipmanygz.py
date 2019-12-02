@@ -8,7 +8,7 @@ parser.add_argument('--input_dir', default='.')
 parser.add_argument('--output_dir', default='output')
 
 parser.add_argument('--file_type', default='.gz')
-parser.add_argument('--target_str', default='com.merge.gun.shoot.zombie')
+parser.add_argument('--target_str', default='')
 parser.add_argument('--file_prefix', default='rawlog.')
 ns = parser.parse_args()
 

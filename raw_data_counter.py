@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 #
-# 2019/12/17 Optimize IO and mem.
+# 2019/12/17 Optimize IO and Mem.
 # @auth:zeyu.yang@datavisor.com
 
 import sys
@@ -12,8 +12,6 @@ import time
 import logging
 
 
-# event_type_field = 'eventtype'
-event_type_field = 'EVENT_TYPE_NAME'
 # counters
 file_count = 0
 v_error_count = 0
@@ -64,15 +62,16 @@ def write_result_to_csv(events):
     else:
         mlogger.warning("No eligible data")
 
+
 if __name__ == '__main__':
     init_logger()
 
     parser = argparse.ArgumentParser()
+    parser.add_argument('--event_type_field', default='eventtype')
     parser.add_argument('--input_dir', default='input')
     parser.add_argument('--output_dir', default='output')
 
     parser.add_argument('--file_type', default='.gz')
-    parser.add_argument('--target_str', default='')
     parser.add_argument('--file_prefix', default='rawlog.')
     ns = parser.parse_args()
 
@@ -91,10 +90,10 @@ if __name__ == '__main__':
                     for line in lines:
                         try:
                             mp = json.loads(line.strip())
-                            e_type = mp.get(event_type_field)
+                            e_type = mp.get(ns.event_type_field)
                             if not e_type:
                                 mlogger.debug(
-                                    "field {} is none.".format(event_type_field))
+                                    "field {} is none.".format(ns.event_type_field))
                                 mlogger.debug(line)
                             if e_type not in events:
                                 events[e_type] = {}

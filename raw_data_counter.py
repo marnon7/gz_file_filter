@@ -49,7 +49,7 @@ def read_gz_file(path):
 
 def write_result_to_csv(events):
     if events:
-        output = open('counters.csv', 'w+')
+        output = open('counters.txt', 'w+')
         for e_type, counters in events.items():
             for field, cnt in counters.items():
                 if not e_type:
@@ -58,7 +58,7 @@ def write_result_to_csv(events):
                 output.write(s+'\n')
 
         mlogger.info(
-            'Total %d files finished, output in counters.csv' % file_count)
+            'Total %d files finished, output in counters.txt' % file_count)
     else:
         mlogger.warning("No eligible data")
 
